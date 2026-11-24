@@ -5,9 +5,10 @@ the air, gives each station its own chat window with history, signal reports,
 stored messages and an inbox, and puts JS8Call's right-click commands on single
 buttons.
 
-JS8FastChat is one half of **[JS8MapChat](https://github.com/HamRadioMadeSimple/JS8MapChat)**.
+JS8FastChat is the companion app to
+**[JS8Map Spotter](https://github.com/HamRadioMadeSimple/JS8MapSpotter)**.
 JS8Map Spotter draws the map; FastChat does the talking. Each has a button that
-brings the other to the front. This folder is FastChat; the map is beside it.
+brings the other to the front.
 
 Current version: **1.76** (build 2026-10-31). Windows and Linux.
 
@@ -31,7 +32,7 @@ Start order: **JS8Call, then JS8Map, then JS8FastChat.**
 
 ## Install on Windows
 
-1. Open the [Releases](https://github.com/HamRadioMadeSimple/JS8MapChat/releases/latest) page and download
+1. Open the [Releases](https://github.com/HamRadioMadeSimple/JS8FastChat/releases/latest) page and download
    `JS8FastChat_v1.76_Setup.exe`. Your browser saves it to your Downloads folder.
 2. Double-click it in Downloads and follow the installer.
 3. Start JS8FastChat from the desktop icon.
@@ -43,7 +44,7 @@ To update, download the newer `Setup.exe` and run it. Your settings are kept.
 Needs Python 3.8 or newer with Tk. The installer checks, and offers to add
 anything missing (`python3-tk`, `unzip`, `wmctrl`, `xdotool`).
 
-1. Open the [Releases](https://github.com/HamRadioMadeSimple/JS8MapChat/releases/latest) page and download
+1. Open the [Releases](https://github.com/HamRadioMadeSimple/JS8FastChat/releases/latest) page and download
    `JS8FastChat_Ver_1.76_build_2026-10-31_Linux.tar.gz`. Your browser saves it to
    your Downloads folder. Do not unpack it yourself.
 2. Open a terminal (Ctrl+Alt+T), paste these three lines at once, and press Enter:
@@ -112,6 +113,6 @@ Windows build), and refuses to ship a package containing operator data. See
 ARCHITECTURE.md section 8.
 
 License: GPL-3.0, see [LICENSE](../LICENSE) at the repository root.
-Problems: the [Issues](https://github.com/HamRadioMadeSimple/JS8MapChat/issues) tab.
+Problems: the [Issues](https://github.com/HamRadioMadeSimple/JS8FastChat/issues) tab.
 
 73 de KW3KW - Ham Made Simple

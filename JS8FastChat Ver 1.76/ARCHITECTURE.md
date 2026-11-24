@@ -3,15 +3,15 @@
 How the program is put together, for contributors. For *using* it see the
 JS8FastChat Instructional Guide; for installing it see `README.md` in this
 folder; for open items see the Issues page of
-[JS8MapChat](https://github.com/HamRadioMadeSimple/JS8MapChat).
+[JS8FastChat](https://github.com/HamRadioMadeSimple/JS8FastChat).
 
-FastChat lives in the JS8MapChat repository, beside JS8Map Spotter:
+The JS8FastChat repository (named JS8MapChat until 2026-11-24) holds:
 
 ```
-JS8MapChat/                 README, LICENSE (GPL-3.0), .gitignore, .gitattributes
+JS8FastChat/                README, LICENSE (GPL-3.0), .gitignore, .gitattributes
   check_twins.bat           the Windows build's twin gate (section 6)
   docs/                     the illustrated JS8FastChat PDF guides
-  JS8Map Ver <v>/           JS8Map Spotter
+  JS8Map Ver <v>/           the older JS8Map 1.75 (replaced by JS8Map Spotter)
   JS8FastChat Ver <v>/      this app
 ```
 
@@ -286,7 +286,7 @@ system's Python. Nothing is compiled, so the Linux package is built on the
 Windows PC and the container build box is no longer in the loop.
 
 **Distribution.** Both packages are attached to a release on the
-[JS8MapChat Releases page](https://github.com/HamRadioMadeSimple/JS8MapChat/releases),
+[JS8FastChat Releases page](https://github.com/HamRadioMadeSimple/JS8FastChat/releases),
 and the PDF guides go in the repository's `docs/` folder. Operators download
 with their browser straight into their own Downloads folder; nothing is copied
 between PCs. The install lines in `README.md`, the Linux guide,
