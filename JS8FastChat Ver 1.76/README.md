@@ -95,6 +95,8 @@ program does not touch them.
 
 - **[Video: JS8FastChat - Companion App to JS8Map Spotter](https://youtu.be/yx9uM26-_6w)** -
   what FastChat does and how it works with JS8Map Spotter.
+- **[JS8FastChat Quick Start Guide](../docs/JS8FastChat_Quick_Start_Ver1_76.pdf)** -
+  install, JS8Call settings and the main controls on four pages.
 - **[Installing JS8FastChat on Linux](../docs/Installing_JS8FastChat_on_Linux.pdf)** -
   the install below, illustrated, with troubleshooting.
 - **[JS8FastChat Instructional Guide](../docs/JS8FastChat_Instructional_Guide_Ver1_76.pdf)** -
