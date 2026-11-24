@@ -50,7 +50,7 @@ JS8MapChat talks to JS8Call over its network API. It does not modify JS8Call.
 
 ## Installing
 
-Installers for Windows and packages for Linux are on the [Releases](../../releases) page. Illustrated guides for both apps are in the [docs](docs) folder.
+Installers for Windows and packages for Linux are on the [Releases](../../releases) page. Illustrated JS8FastChat guides are in the [docs](docs) folder.
 
 **JS8FastChat on Linux:** download the `_Linux.tar.gz` into Downloads and paste the three lines in [the JS8FastChat README](JS8FastChat%20Ver%201.76/README.md#install-on-linux), or follow [Installing JS8FastChat on Linux](docs/Installing_JS8FastChat_on_Linux.pdf).
 

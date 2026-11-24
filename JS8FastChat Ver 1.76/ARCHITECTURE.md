@@ -10,7 +10,7 @@ FastChat lives in the JS8MapChat repository, beside JS8Map Spotter:
 ```
 JS8MapChat/                 README, LICENSE (GPL-3.0), .gitignore, .gitattributes
   check_twins.bat           the Windows build's twin gate (section 6)
-  docs/                     the illustrated PDF guides for both apps
+  docs/                     the illustrated JS8FastChat PDF guides
   JS8Map Ver <v>/           JS8Map Spotter
   JS8FastChat Ver <v>/      this app
 ```
