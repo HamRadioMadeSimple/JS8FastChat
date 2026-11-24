@@ -1,6 +1,6 @@
 # ==============================================================================
-#  JS8MapChat — .gitignore
-#  Lives at:  C:\Users\KW3KW\Documents\Claude AI\JS8MapChat\.gitignore
+#  JS8FastChat — .gitignore
+#  Lives at the repository root.
 #  Created 2026-07-14 (ticket #8 — first version control in this project)
 #
 #  RULE OF THUMB: git tracks SOURCE. It does not track builds, runtime state,
@@ -135,7 +135,6 @@ Desktop.ini
 #                     If it churns on every run, move it out.
 # ==============================================================================
 Zip Files/
-JS8Map Ver 1.75/boot.js
 js8_spots.db-shm
 js8_spots.db-wal
 *.db-shm
@@ -146,14 +145,12 @@ js8_spots.db-wal
 
 # user-assigned group colours -- churns on every sync/prune, holds the
 # operator's own groups. Untracked per the "move it out" note below.
-JS8Map Ver 1.75/js8_groups.json
 
 # Linux package output - 15 MB, rebuilt any time by make_js8map_package.sh
 *.tar.gz
  
 # Generated map output - rewritten on every render. Verified 2026-08-28: 
 # nothing in any .sh, .iss or .spec references it. Untracked per section 2. 
-JS8Map Ver 1.75/ham_map.html
 
 # JS8FastChat 1.76: release packages are built by tools/make_release.py and go
 # on the Releases page, never in the repo. twin_path.txt holds a path on the

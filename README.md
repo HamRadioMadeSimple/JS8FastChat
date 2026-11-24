@@ -24,7 +24,7 @@ Work a selected station without going back to the JS8Call interface.
 
 ## Related
 
-**[JS8Map Spotter](https://github.com/HamRadioMadeSimple/JS8MapSpotter)** — every station JS8Call hears on a live, offline map, with CommStat StatReps, MCForms and QSOs between other stations. It replaces JS8Map 1.75 and opens stations in JS8FastChat.
+**[JS8Map Spotter](https://github.com/HamRadioMadeSimple/JS8MapSpotter)** — every station JS8Call hears on a live, offline map, with CommStat StatReps, MCForms and QSOs between other stations. It opens stations in JS8FastChat with one click.
 
 **[FCC Lookup](https://github.com/HamRadioMadeSimple/FCC_Lookup)** — offline callsign lookup for U.S. FCC and Canadian amateur licenses.
 
@@ -46,19 +46,13 @@ Installers for Windows and packages for Linux are on the [Releases](../../releas
 
 JS8FastChat is Python. The Windows build uses PyInstaller driven by `Build_JS8FastChat.bat`, with Inno Setup for the installer. The Linux package is its Python source, run with the system's Python and Tk, so nothing is compiled; `tools/make_release.py` in its folder builds every package. How FastChat is put together is in its [ARCHITECTURE.md](JS8FastChat%20Ver%201.76/ARCHITECTURE.md).
 
-`shared_resolver.py` must stay byte-identical with the copy in JS8Map Spotter and in `JS8Map Ver 1.75`; `check_twins.bat` checks the local pair before a Windows build.
-
-**`JS8Map Ver 1.75`** is the older map program that used to ship with JS8FastChat (and its releases up to 1.75.1). It has been replaced by [JS8Map Spotter](https://github.com/HamRadioMadeSimple/JS8MapSpotter) and is kept here only for reference and for the build check.
+`shared_resolver.py` must stay byte-identical with the copy in [JS8Map Spotter](https://github.com/HamRadioMadeSimple/JS8MapSpotter), or the two apps stop finding each other. `Build_JS8FastChat.bat` and `tools/make_release.py` check this before building; `check_twins.bat` is the same check called by JS8Map Spotter's Windows build.
 
 Callsign databases are not included. They are built on first run from public license data.
 
 ## Credits
 
 **JS8Call** by KN4CRD and contributors. JS8FastChat is an independent companion and is not affiliated with or endorsed by the JS8Call project.
-
-**Leaflet** — map display library, © Vladimir Agafonkin and contributors, BSD 2-Clause licensed.
-
-**Map data** — © OpenStreetMap contributors, available under the Open Database License. Basemap styling © CARTO.
 
 **FCC license database** — United States government work, public domain. **Canadian amateur callsign data** — open data published by ISED Canada.
 

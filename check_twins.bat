@@ -1,11 +1,11 @@
 @echo off
 REM ============================================================================
 REM  check_twins.bat  --  #35 build gate.  Lives at the PROJECT ROOT.
-REM  JS8MapChat 1.75
+REM  JS8FastChat + JS8Map Spotter
 REM ============================================================================
 REM  The shared-folder resolver (shared_resolver.py) ships as TWO byte-identical
 REM  copies, one in each app tree:
-REM      JS8Map Ver 1.75\shared_resolver.py
+REM      JS8Map Spotter V<newest>\shared_resolver.py   (beside this file)
 REM      JS8FastChat Ver 1.76\js8fastchat\shared_resolver.py
 REM
 REM  If they ever DIVERGE, the two shipped exes carry different resolvers and
@@ -25,7 +25,12 @@ REM ============================================================================
 setlocal enabledelayedexpansion
 
 set "ROOT=%~dp0"
-set "MAP_COPY=%ROOT%JS8Map Ver 1.75\shared_resolver.py"
+REM  Spotter's copy: the "JS8Map Spotter V..." folder beside this file (the
+REM  last one in name order if there are several).
+set "MAP_COPY=%ROOT%JS8Map Spotter (folder not found)\shared_resolver.py"
+for /d %%D in ("%ROOT%JS8Map Spotter V*") do (
+    if exist "%%~fD\shared_resolver.py" set "MAP_COPY=%%~fD\shared_resolver.py"
+)
 set "FC_COPY=%ROOT%JS8FastChat Ver 1.76\js8fastchat\shared_resolver.py"
 
 echo.
@@ -33,7 +38,7 @@ echo   [#35 gate] Verifying the two shared_resolver.py copies are identical ...
 
 REM -- 1) BOTH must exist.  A missing file ABORTS -- never read absence as OK. --
 if not exist "%MAP_COPY%" (
-    echo   [#35 gate] ^>^> ABORT: JS8Map copy NOT FOUND:
+    echo   [#35 gate] ^>^> ABORT: JS8Map Spotter copy NOT FOUND:
     echo               %MAP_COPY%
     endlocal & exit /b 1
 )
@@ -55,7 +60,7 @@ for /f "skip=1 delims=" %%H in ('certutil -hashfile "%FC_COPY%" MD5') do (
 
 REM -- Guard: if EITHER hash came back empty, certutil failed -- ABORT loud. ----
 if not defined MAP_HASH (
-    echo   [#35 gate] ^>^> ABORT: could not hash the JS8Map copy.
+    echo   [#35 gate] ^>^> ABORT: could not hash the JS8Map Spotter copy.
     endlocal & exit /b 1
 )
 if not defined FC_HASH (
@@ -72,7 +77,7 @@ if /i "%MAP_HASH%"=="%FC_HASH%" (
     echo   [#35 gate] ============================================================
     echo   [#35 gate]  ^>^> ABORT: the two shared_resolver.py copies DIVERGED.
     echo   [#35 gate] ============================================================
-    echo   [#35 gate]  JS8Map  : %MAP_HASH%
+    echo   [#35 gate]  Spotter : %MAP_HASH%
     echo   [#35 gate]  FastChat: %FC_HASH%
     echo   [#35 gate]
     echo   [#35 gate]  You edited one copy and not the other.  Ticket #35 is back.

@@ -21,12 +21,12 @@ Current version: **1.76** (build 2026-10-31). Windows and Linux.
 2. **In JS8Call:** File > Settings > Reporting. Tick *Enable TCP Server API*
    and *Accept TCP Requests*, port **2442**, *TCP Max Connections* **5**.
    Restart JS8Call.
-   Each program that talks to JS8Call (JS8Map, FastChat, JS8Spotter, CommStat)
+   Each program that talks to JS8Call (JS8Map Spotter, FastChat, JS8Spotter, CommStat)
    takes one connection. At the default of 1, the programs that miss out fail
    silently: they still show activity, but the frequency and offset boxes stay
    empty and nothing transmits.
 
-Start order: **JS8Call, then JS8Map, then JS8FastChat.**
+Start order: **JS8Call, then JS8Map Spotter, then JS8FastChat.**
 
 ---
 
@@ -66,7 +66,7 @@ older copy and moves the menu entry to the new one.
 
 **To remove:** close JS8FastChat and paste these. Each line works on its own.
 Your settings in `~/.local/share/JS8MapChat/FastChat` are kept; delete that
-folder too if you want them gone, but leave `Shared` beside it, which JS8Map uses.
+folder too if you want them gone, but leave `Shared` beside it, which JS8Map Spotter uses.
 
 ```sh
 rm -rf ~/Applications/"JS8FastChat Ver "*
@@ -87,7 +87,7 @@ program does not touch them.
 | | Windows | Linux |
 |---|---|---|
 | Settings and logs | `%LOCALAPPDATA%\JS8MapChat\FastChat` | `~/.local/share/JS8MapChat/FastChat` |
-| JS8Map handoff | `%LOCALAPPDATA%\JS8MapChat\Shared` | `~/.local/share/JS8MapChat/Shared` |
+| JS8Map Spotter handoff | `%LOCALAPPDATA%\JS8MapChat\Shared` | `~/.local/share/JS8MapChat/Shared` |
 
 ---
 
@@ -108,8 +108,8 @@ Run from source: `sh debug.sh` (Linux) or `Run_JS8FastChat_Debug.bat` (Windows).
 
 Release packages are made only by `tools/make_release.py`, never by hand. It
 checks the version strings, checks that `shared_resolver.py` still matches
-JS8Map's copy (as `check_twins.bat` at the repository root does for the
-Windows build), and refuses to ship a package containing operator data. See
+JS8Map Spotter's copy (as `Build_JS8FastChat.bat` does for the Windows
+build), and refuses to ship a package containing operator data. See
 ARCHITECTURE.md section 8.
 
 License: GPL-3.0, see [LICENSE](../LICENSE) at the repository root.

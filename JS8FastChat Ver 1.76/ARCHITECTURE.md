@@ -9,9 +9,8 @@ The JS8FastChat repository (named JS8MapChat until 2026-11-24) holds:
 
 ```
 JS8FastChat/                README, LICENSE (GPL-3.0), .gitignore, .gitattributes
-  check_twins.bat           the Windows build's twin gate (section 6)
+  check_twins.bat           twin gate called by JS8Map Spotter's Windows build (section 6)
   docs/                     the illustrated JS8FastChat PDF guides
-  JS8Map Ver <v>/           the older JS8Map 1.75 (replaced by JS8Map Spotter)
   JS8FastChat Ver <v>/      this app
 ```
 
@@ -23,7 +22,7 @@ GitHub repository.
 ## 1. What it does, and the rules it follows
 
 JS8FastChat is a per-station chat console for JS8Call. It reads the shared spot
-database that JS8Map / JS8Map Spotter fills, shows who is on the air, and gives
+database that JS8Map Spotter fills, shows who is on the air, and gives
 each station its own chat window with history, signal reports, stored messages
 and an inbox. It transmits through JS8Call's TCP API.
 
@@ -61,13 +60,13 @@ flowchart TD
     CORE --> ACT["ActivityService"]
     CORE --> TX["TxService"]
     ACT --> RD["ActivityReader"]
-    RD --> DB[("JS8Map's spot DB<br/>SQLite, read-only")]
+    RD --> DB[("JS8Map Spotter's spot DB<br/>SQLite, read-only")]
     RD --> LOC["DbLocator<br/>finds the DBs"]
     MW --> POP["FastChatPopup<br/>one chat window per station"]
     MW --> LIVE["JS8LiveRigMonitor"]
     LIVE --> RXP["rx_partials<br/>live long-message preview"]
     MW --> IP["IntentPoller"]
-    IP --> SHARED[("SHARED_DIR<br/>the JS8Map mailbox")]
+    IP --> SHARED[("SHARED_DIR<br/>the JS8Map Spotter mailbox")]
     MW --> HB["FastChatHeartbeat"]
     HB --> SHARED
     API --> JS8["JS8Call"]
@@ -93,22 +92,22 @@ results back to the UI thread.
 | `js8fastchat/app_config.py` | Loads and saves `UserAppConfig`, including older config files and renamed settings. |
 | `js8fastchat/utils.py` | `norm_call`, `base_call`, time and frequency formatting, watch-word matching. |
 | `js8fastchat/call_info.py` | Who a station is: FCC / Canadian lookup, grid, distance, the HEAR / HEARD panel numbers. |
-| `js8fastchat/shared_resolver.py` | **Twin file.** Must stay byte-identical to JS8Map's copy. Finds the mailbox. |
-| `js8fastchat/fastchat_heartbeat.py` | Writes `js8fastchat_alive.json` so JS8Map can enable its FastChat button. |
-| `js8fastchat/data/activity_reader.py` | Reads JS8Map's SQLite databases and turns them into `ActivityRow`s. The largest single file. |
-| `js8fastchat/data/db_locator.py` | Finds JS8Map's spot, relay, FCC and Canadian databases. |
+| `js8fastchat/shared_resolver.py` | **Twin file.** Must stay byte-identical to JS8Map Spotter's copy. Finds the mailbox. |
+| `js8fastchat/fastchat_heartbeat.py` | Writes `js8fastchat_alive.json` so JS8Map Spotter can enable its FastChat button. |
+| `js8fastchat/data/activity_reader.py` | Reads JS8Map Spotter's SQLite databases and turns them into `ActivityRow`s. The largest single file. |
+| `js8fastchat/data/db_locator.py` | Finds JS8Map Spotter's spot, relay, FCC and Canadian databases. |
 | `js8fastchat/data/js8call_ini.py` | Reads `JS8Call.ini` for the operator's callsign, groups and watch list. |
-| `js8fastchat/data/zip3_latlon.py` | First-three-digits-of-ZIP to approximate lat/lon, the last fallback for distance: when there is no grid and the FCC record has a ZIP but no lat/lon. A copy of JS8Map's table. |
+| `js8fastchat/data/zip3_latlon.py` | First-three-digits-of-ZIP to approximate lat/lon, the last fallback for distance: when there is no grid and the FCC record has a ZIP but no lat/lon. A copy of JS8Map Spotter's table. |
 | `js8fastchat/services/js8_api.py` | The TCP client: probe, config, speed, send, store, halt. |
 | `js8fastchat/services/activity_service.py`, `tx_service.py` | The two services `FastChatCore` holds: activity rows, and the one path every transmission takes. |
 | `js8fastchat/services/live_rig_monitor.py` | Listens to JS8Call's event stream. |
 | `js8fastchat/services/rx_partial.py` | Assembles long incoming messages frame by frame for a live preview. |
-| `js8fastchat/services/intent_poller.py` | Watches the mailbox for JS8Map's "open FastChat on this call" requests. |
+| `js8fastchat/services/intent_poller.py` | Watches the mailbox for JS8Map Spotter's "open FastChat on this call" requests. |
 | `js8fastchat/ui/main_window.py` | The console: station lists, selection, tiles, Add Call. ~3,300 lines. |
 | `js8fastchat/ui/main_window_*.py` | Four mixins split out of it: the builder / send path, message popups, group activity, the UI substrate and the rig-intent-speed bar. |
 | `js8fastchat/ui/fastchat_popup.py` | The per-station chat window. |
 | `js8fastchat/ui/tx_lock.py`, `tx_indicator.py` | The process-global transmit lock and its sine-wave display. |
-| `js8fastchat/ui/theme.py`, `design_tokens.py` | Dark and light themes. The structural colours are JS8Map's, so the two apps look like one. |
+| `js8fastchat/ui/theme.py`, `design_tokens.py` | Dark and light themes. The structural colours are JS8Map Spotter's, so the two apps look like one. |
 | `debug.sh`, `Run_JS8FastChat_Debug.bat` | Run from source, Linux and Windows. |
 | `Launch_JS8FastChat.vbs`, `Launch_FastChat_Popup.vbs` | Windows: start from source with no console window; the second opens straight to one callsign's chat window. |
 | `linux_install.sh`, `update_linux.sh`, `tools/install_linux_launcher.sh` | Linux install, update, and the menu / desktop icons. |
@@ -117,7 +116,7 @@ results back to the UI thread.
 | `README.md`, `ARCHITECTURE.md` | Install instructions for users; this document. |
 
 `.gitignore`, `.gitattributes`, `LICENSE` and `check_twins.bat` are at the
-repository root and cover both apps.
+repository root.
 
 `MainWindow` is `class MainWindow(_GroupActivityMixin, _MessagePopupsMixin,
 _UISubstrateMixin, _RigIntentSpeedMixin, _BuilderSendTxMixin, tk.Tk)`. The
@@ -137,7 +136,7 @@ because the launcher ran it hidden.
 | `_SOURCE_DIR` | Where this source tree literally sits. `_MEIPASS` when frozen. | Read-only assets. **Never write here.** |
 | `ROOT_DIR` | The app's real folder on disk: the `.exe`'s folder when frozen, the app root when a script. | A place to **look**, not a place to write. May be read-only (Program Files). |
 | `DATA_DIR` | FastChat's own state: config, layout, debug log, sent-message log, capture log. | The **only** place this app writes its own state. |
-| `SHARED_DIR` | The JS8Map ↔ FastChat mailbox. | Both apps must compute the same path. |
+| `SHARED_DIR` | The JS8Map Spotter ↔ FastChat mailbox. | Both apps must compute the same path. |
 
 `DATA_DIR` and `SHARED_DIR` are per-user and **independent of where the app is
 installed**:
@@ -151,8 +150,8 @@ macOS     ~/Library/Application Support/JS8MapChat/...
 That independence is what made the 1.76 move to a source install painless: the
 program moved from `~/.local/lib/JS8FastChat` (1.75.1 and earlier), through
 `~/JS8FastChat` (the first 1.76 tests), to `~/Applications/JS8FastChat Ver 1.76`,
-and every setting, and the JS8Map handoff, kept working untouched.
-`~/Applications` is now the standard home for every JS8MapChat app on Linux.
+and every setting, and the JS8Map Spotter handoff, kept working untouched.
+`~/Applications` is now the standard home for JS8FastChat on Linux.
 
 Files in `DATA_DIR`, all written by FastChat:
 
@@ -161,18 +160,18 @@ Files in `DATA_DIR`, all written by FastChat:
 | `mjs_js8fastchat_3_2_config.json` | Host, port, theme, scale, filters, macros, watch words |
 | `js8fastchat_layout_3_2.json` | Window sizes and positions, inbox read watermarks |
 | `js8fastchat_tx_history_3_3.json` | What **we** sent, per station - the gold side of a chat window |
-| `js8fastchat_capture_3_4.json` | What each station sent to anyone, kept past JS8Map's DB window |
+| `js8fastchat_capture_3_4.json` | What each station sent to anyone, kept past JS8Map Spotter's DB window |
 | `js8fastchat_3_2_debug.log` | Diagnostics |
 
 Files in `SHARED_DIR` - the mailbox. FastChat writes the first, reads the rest:
 
 | File | Direction |
 |---|---|
-| `js8fastchat_alive.json` | FastChat → JS8Map: "I am running" |
-| `js8fastchat_intent.json` | JS8Map → FastChat: "open a chat with this call" |
-| `js8map_raise_fastchat.json` | JS8Map → FastChat: "come to the front" |
-| `js8map_server.json` | JS8Map → FastChat: its local server port |
-| `js8map_outgoing_tx.json` | JS8Map → FastChat: frames JS8Map sent, so a chat window shows both halves of a QSO |
+| `js8fastchat_alive.json` | FastChat → JS8Map Spotter: "I am running" |
+| `js8fastchat_intent.json` | JS8Map Spotter → FastChat: "open a chat with this call" |
+| `js8map_raise_fastchat.json` | JS8Map Spotter → FastChat: "come to the front" |
+| `js8map_server.json` | JS8Map Spotter → FastChat: its local server port |
+| `js8map_outgoing_tx.json` | JS8Map Spotter → FastChat: frames JS8Map Spotter sent, so a chat window shows both halves of a QSO |
 
 **None of these ever belong in a release package or in the repository.**
 `make_release.py` refuses to finish if one gets in, and the root `.gitignore` keeps
@@ -184,7 +183,7 @@ them out of commits.
 
 A callsign can carry a suffix: `W3BFO/P` is the same licence as `W3BFO` but a
 **different rig, in a different place, on the air at the same time**. JS8Call and
-JS8Map have always shown them separately. FastChat did not, until 1.75.1.
+JS8Map Spotter has always shown them separately. FastChat did not, until 1.75.1.
 
 **The rule:** a station's identity is its **full** callsign.
 
@@ -211,7 +210,7 @@ base_call(x)` comparison silently keep matching. **Do not compare identity with
 
 ---
 
-## 6. Talking to JS8Map
+## 6. Talking to JS8Map Spotter
 
 Two separate channels, and they fail in different ways.
 
@@ -225,22 +224,25 @@ per-user path that always exists.
 if the two copies drift, each app computes a different mailbox, neither sees the
 other's files, and both quietly conclude the other is not running. There is no
 error message for this. `tools/make_release.py` compares the two copies on every
-release and stops if they differ. In the repository layout it finds
-`JS8Map Ver <v>/` beside this folder by itself; `tools/twin_path.txt` (personal,
-never committed) can point it somewhere else. `check_twins.bat` at the repository
-root does the same comparison for the Windows build, and names both version
-folders: **when either app's folder is renamed for a new version, update its
-path in `check_twins.bat` in the same commit.**
+release and stops if they differ. It finds a `JS8Map Spotter V<v>/` folder
+beside this one by itself; `tools/twin_path.txt` (personal, never committed)
+can point it somewhere else. `Build_JS8FastChat.bat` does the same comparison
+for the Windows build, finding the newest "JS8Map Spotter V..." folder under
+Documents, Downloads or Desktop. `check_twins.bat` at the repository root is the
+copy of this check that JS8Map Spotter's `Build_JS8Map.bat` calls from one
+folder up; it compares the newest `JS8Map Spotter V*` folder beside it with
+`JS8FastChat Ver 1.76`. **When FastChat's folder is renamed for a new version,
+update its path in `check_twins.bat` in the same commit.**
 
 **Raising the other window is NOT the mailbox.** FastChat's button that brings
 the map to the front uses `wmctrl`, falling back to `xdotool`, and never touches
-`SHARED_DIR`. JS8Map's button that brings FastChat forward *does* go through the
+`SHARED_DIR`. JS8Map Spotter's button that brings FastChat forward *does* go through the
 mailbox (`js8map_raise_fastchat.json`). The two directions therefore fail
 independently: one button can work perfectly while the other is dead. Test both.
 
-**The databases.** FastChat reads JS8Map's SQLite spot database directly, and
-read-only. JS8Map's first-run wizard is what downloads the FCC and Canadian
-callsign data, which is why JS8Map has to be installed first. `db_locator.py`
+**The databases.** FastChat reads JS8Map Spotter's SQLite spot database directly, and
+read-only. JS8Map Spotter's first-run wizard is what downloads the FCC and Canadian
+callsign data, which is why JS8Map Spotter has to be installed first. `db_locator.py`
 hunts for all four.
 
 ---
@@ -249,7 +251,7 @@ hunts for all four.
 
 `JS8ApiClient` speaks JS8Call's TCP API on port 2442. **Each connected program
 takes one connection**, so JS8Call's *TCP Max Connections* must be at least the
-number of programs talking to it: JS8Map, FastChat, and any companion such as
+number of programs talking to it: JS8Map Spotter, FastChat, and any companion such as
 JS8Spotter or CommStat. The default is 1.
 
 A refused connection is **silent**. The program that lost still shows activity,
@@ -298,7 +300,7 @@ in `~/Downloads`. Packages are never committed (the root `.gitignore` excludes
 zips shipped operator data more than once. It:
 
 1. checks the version agrees in `__init__.py`, `constants.py`, `APP_BUILD` and
-   the `.iss`, and that `shared_resolver.py` still matches JS8Map's copy;
+   the `.iss`, and that `shared_resolver.py` still matches JS8Map Spotter's copy;
 2. runs the unit tests if a `tests/` folder exists;
 3. packs the tree, leaving out operator data, build output, caches, personal
    files and the other system's scripts;
@@ -355,7 +357,7 @@ build proven from source and broken when installed has happened twice.
   `ActivityRow`, fill it in `ActivityReader.display_rows()`, and read it with a
   `getattr` default - manual "Add Call" rows never pass through the reader.
 * **Anything that identifies a station:** use `norm_call`. Section 5.
-* **A new file shared with JS8Map:** add it to `constants.py`, add it to
+* **A new file shared with JS8Map Spotter:** add it to `constants.py`, add it to
   `make_release.py`'s exclude list **and** the root `.gitignore` in the same commit, and change
   `shared_resolver.py` in **both** apps or neither.
 * **A new setting:** `UserAppConfig` in `models.py` with a default, since older
